@@ -1,0 +1,288 @@
+package lab7;
+
+import java.awt.GridLayout;
+import java.util.ArrayList;
+
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import lab7.ButtonListener;
+
+public class GUI implements Runnable {
+
+	lab7.Game _g;
+	
+	ArrayList<ArrayList<JLabel>> _table;
+	ArrayList<ArrayList<String>> _stringTable;
+	ArrayList<JLabel> _butt;
+	ArrayList<JLabel> _row1;
+	ArrayList<JLabel> _row2;
+	ArrayList<JLabel> _row3;
+	ArrayList<JLabel> _row4;
+	ArrayList<JLabel> _row5;
+	ArrayList<JLabel> _row6;
+	
+	ArrayList<String> _sRow1;
+	ArrayList<String> _sRow2;
+	ArrayList<String> _sRow3;
+	ArrayList<String> _sRow4;
+	ArrayList<String> _sRow5;
+	ArrayList<String> _sRow6;
+
+	int _c, _i = 0, _j = 0;
+	String _playerTurn;
+	boolean _turn, _win;
+	ButtonListener _x;
+	JPanel _imagePanel;
+	JPanel _textPanel;
+	JPanel _winPanel;
+	JLabel _bb;
+	JButton _b;
+	java.awt.Container _contentPane;
+	JFrame _f;
+	
+	public GUI(){
+		_g = new lab7.Game(this);
+		
+		_table = new ArrayList<ArrayList<JLabel>>();
+		_stringTable = new ArrayList<ArrayList<String>>();
+		_butt = new ArrayList<JLabel>();
+		_row1 = new ArrayList<JLabel>();
+		_row2 = new ArrayList<JLabel>();
+		_row3 = new ArrayList<JLabel>();
+		_row4 = new ArrayList<JLabel>();
+		_row5 = new ArrayList<JLabel>();
+		_row6 = new ArrayList<JLabel>();
+		_sRow1 = new ArrayList<String>();
+		_sRow2 = new ArrayList<String>();
+		_sRow3 = new ArrayList<String>();
+		_sRow4 = new ArrayList<String>();
+		_sRow5 = new ArrayList<String>();
+		_sRow6 = new ArrayList<String>();
+		_playerTurn = "Player 1's turn";
+		_turn = true;
+		_win = false;
+
+		_imagePanel = new JPanel();
+		_textPanel = new JPanel();
+		_winPanel = new JPanel();
+		_bb =new JLabel();
+		_b = new JButton("Reset game");
+		
+		//_g.print();
+		
+	}
+	@Override
+	public void run() {
+
+		_f = new JFrame("game");
+		_f.setVisible(true);
+		_f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		_contentPane = _f.getContentPane();		
+		BoxLayout bl = new BoxLayout(_contentPane, BoxLayout.Y_AXIS );
+		_contentPane.setLayout(bl);
+		_f.add(_textPanel); 
+		BoxLayout bll = new BoxLayout(_textPanel, BoxLayout.X_AXIS );
+		_textPanel.setLayout(bll);
+		_bb.setText(_playerTurn);
+		_textPanel.add(_bb);
+		_contentPane.add(_imagePanel); // == f.getContentPane().add(imagePanel);
+		GridLayout gl = new GridLayout(7, 7);
+		_imagePanel.setLayout(gl);
+		
+		_winPanel.add(_b);
+		BoxLayout wl = new BoxLayout(_winPanel, BoxLayout.X_AXIS );
+		_winPanel.setLayout(wl);
+		_contentPane.add(_winPanel);
+		_b.setVisible(false);
+		_b.addActionListener(new ResetListener(this));
+		
+		// show 7*7 game board
+		buttonRefresh();
+		iconRefresh();
+		
+		_f.pack();
+		System.out.println("the one in GUI: "+_stringTable);
+	//	_g.print();
+
+	}
+
+	public void buttonRefresh() {
+		for (int r = 1; r <= 7; r = r + 1) { // add buttons
+			int xx;
+			xx=r-1;
+			JButton b = new JButton("Col" + " " + r);
+			_imagePanel.add(b);
+			b.addActionListener(new ButtonListener(this, xx,_g));
+			
+
+		}
+		_table.add(_butt);
+	}
+
+	public void iconRefresh() {
+
+		for (int c = 1; c <= 7; c = c + 1) {
+			JLabel lab = new JLabel();
+			ImageIcon im = new ImageIcon("images/blank.png");
+			lab.setIcon(im);
+			_imagePanel.add(lab);
+			_row1.add(lab);
+			String ss;
+			ss = "blank";
+			_sRow1.add(ss);
+		}
+		for (int c = 1; c <= 7; c = c + 1) {
+			JLabel lab = new JLabel();
+			ImageIcon im = new ImageIcon("images/blank.png");
+			lab.setIcon(im);
+			_imagePanel.add(lab);
+			_row2.add(lab);
+			String ss;
+			ss = "blank";
+			_sRow2.add(ss);
+		}
+		for (int c = 1; c <= 7; c = c + 1) {
+			JLabel lab = new JLabel();
+			ImageIcon im = new ImageIcon("images/blank.png");
+			lab.setIcon(im);
+			_imagePanel.add(lab);
+			_row3.add(lab);
+			String ss;
+			ss = "blank";
+			_sRow3.add(ss);
+		}
+		for (int c = 1; c <= 7; c = c + 1) {
+			JLabel lab = new JLabel();
+			ImageIcon im = new ImageIcon("images/blank.png");
+			lab.setIcon(im);
+			_imagePanel.add(lab);
+			_row4.add(lab);
+			String ss;
+			ss = "blank";
+			_sRow4.add(ss);
+		}
+		for (int c = 1; c <= 7; c = c + 1) {
+			JLabel lab = new JLabel();
+			ImageIcon im = new ImageIcon("images/blank.png");
+			lab.setIcon(im);
+			_imagePanel.add(lab);
+			_row5.add(lab);
+			String ss;
+			ss = "blank";
+			_sRow5.add(ss);
+		}
+		for (int c = 1; c <= 7; c = c + 1) {
+			JLabel lab = new JLabel();
+			ImageIcon im = new ImageIcon("images/blank.png");
+			lab.setIcon(im);
+			_imagePanel.add(lab);
+			_row6.add(lab);
+			String ss;
+			ss = "blank";
+			_sRow6.add(ss);
+		}
+		_table.add(_row1);
+		_table.add(_row2);
+		_table.add(_row3);
+		_table.add(_row4);
+		_table.add(_row5);
+		_table.add(_row6);
+		_stringTable.add(_sRow1);
+		_stringTable.add(_sRow2);
+		_stringTable.add(_sRow3);
+		_stringTable.add(_sRow4);
+		_stringTable.add(_sRow5);
+		_stringTable.add(_sRow6);
+
+	}
+
+	public void setIcon(int colNum, int rowNum) {
+
+		String ssy,ssr;
+		ssy ="yellow";
+		ssr = "red";
+		ArrayList<String> sr = convertNJ2(rowNum);
+		if (_turn ==true){
+			sr.set(colNum, ssy);}
+		else {sr.set(colNum, ssr);}
+		ImageIcon iy = new ImageIcon("images/yellow.png");
+		ImageIcon ir = new ImageIcon("images/red.png");
+		ArrayList<JLabel> l;
+		l = convertNJ(rowNum);
+		JLabel j;
+		j = l.get(colNum);
+		if (_turn ==true && _win == false){
+		j.setIcon(iy); 
+		_playerTurn = "Player 1's turn";
+		_bb.setText(_playerTurn);
+		}
+		else if (_win == false){
+		j.setIcon(ir);
+		_playerTurn = "Player 2's turn";
+		_bb.setText(_playerTurn);
+		}
+		l.set(colNum, j);
+		_turn =!_turn;
+
+	}
+	public ArrayList<JLabel> convertNJ(int rowNum){
+		ArrayList<JLabel> j=null;
+		//if (row )
+		switch(rowNum){
+		case 0: j= _row6;break;
+		case 1: j= _row5;break;
+		case 2: j= _row4;break;
+		case 3: j= _row3;break;
+		case 4: j= _row2;break;
+		case 5: j= _row1;break;
+		
+		}
+		return j;
+	}
+	public ArrayList<String> convertNJ2(int rowNum){
+		ArrayList<String> j=null;
+		//if (row )
+		switch(rowNum){
+		case 0: j= _sRow6;break;
+		case 1: j= _sRow5;break;
+		case 2: j= _sRow4;break;
+		case 3: j= _sRow3;break;
+		case 4: j= _sRow2;break;
+		case 5: j= _sRow1;break;
+		
+		}
+		return j;
+	}
+	public ArrayList<ArrayList<String>> passTable(){
+		
+		return _stringTable;
+		
+	}
+	public void win(){
+		_bb.setText(_playerTurn+ "wins");
+		_win = true;
+		_b.setVisible(true);
+		_f.pack();
+	}
+	public void resetPress(){
+//		_b.setVisible(false);
+//		_f.pack();
+		_f.dispose();
+		SwingUtilities.invokeLater(new GUI());
+		
+		
+		
+//		iconRefresh();
+//		_f.pack();
+	}
+	
+	public void full(){
+		
+	}
+}
