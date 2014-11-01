@@ -15,7 +15,7 @@ public class Player {
 		return AP; 
 	}
 
-	public void resetAP() {
+	public static void resetAP() {
 		AP = 8; //at end of turn, sets AP back to 8 for next player
 	}
 
