@@ -46,6 +46,7 @@ public class Game {
 
 	public void endTurn() { //should be triggered by a button click
 		Player.switchPlayer();
+		Player.resetAP();
 	}
 
 	public void addTile() {
