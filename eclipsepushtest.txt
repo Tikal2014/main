@@ -1,3 +1,0 @@
-Test with Eclipse
--Kevin
-hi

@@ -1,4 +1,4 @@
-package code;
+package tikal;
 
 public class Player {
 
