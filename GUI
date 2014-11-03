@@ -1,0 +1,97 @@
+package tikal;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+//***************************************************
+// I use layeredPane to utilize the graph part of our project.
+// For example, the background lies in the bottom layer, the 1st layer is the tiles, and the top layer is buytton.s
+// Thus, we could press the buttons and see everything changing at lower layer.
+// Also, we could add more layers if needed, there is a hundred level limit for layer numbers so no need to worry about the lack of layers.
+//***************************************************
+
+
+public class GUI {			// I define everything here
+    private JFrame frame = new JFrame();
+    private JLayeredPane lpane = new JLayeredPane();
+    private JPanel panel1 = new JPanel();
+    private JPanel panel2 = new JPanel();
+    private JPanel panel3 = new JPanel();
+    private JPanel panel4 = new JPanel();
+    private JPanel panel5 = new JPanel();
+    private JPanel panel6 = new JPanel();
+    private JPanel panel7 = new JPanel();
+    private JPanel panel8 = new JPanel();
+    private JPanel panel9 = new JPanel();
+    
+    public GUI() //this is the constructor
+    		//I define GUI in a simplier way compare to our previous work, there is no run() and we can directly 
+    		// create the oject(a window popup) by running GUI. (It works through last method you see in this file)
+    {
+    	JLabel aa = new JLabel();   
+    	JLabel bb = new JLabel();
+    	ImageIcon im = new ImageIcon("images/background_L.jpg");
+		ImageIcon tt = new ImageIcon("images/tile4.png");
+		
+		
+		
+        frame.setPreferredSize(new Dimension(1280, 768)); // create frame size
+        frame.setLayout(new BorderLayout());   // using borderlayout, basically I just want to put everyhing in the middle
+        frame.add(lpane, BorderLayout.CENTER);  // you can see I select the center
+        lpane.setBounds(0, 0, 1024, 768); 	// this is different from frame size, and it is sort of setting 
+        					// the container size inside the frame
+        
+        
+        //***************iamgeIcons set Icon(image)
+        aa.setIcon(im);
+        bb.setIcon(tt);
+//        bb.setBounds(50, 50, 30, 30);
+        
+        //*************** add imageIcons to Jpanels
+        panel1.add(aa);
+        panel2.add(bb);
+//        panel3.add(bb);
+        
+        //*************** Jpenels' settings
+                // panel#1
+        panel1.setBounds(0, 0, 1024, 768);
+        panel1.setOpaque(true);
+        		// panel#2
+        panel2.setBackground(new Color(0,0,0,0));
+        panel2.setBounds(170, 340, 160, 160);
+        panel2.setOpaque(true);
+     // panel#3
+//        panel3.setBackground(new Color(0,0,0,0));
+//        panel3.setBounds(550, 100, 100, 100);
+//        panel3.setOpaque(true);
+     // panel#4
+     // panel#5
+     // panel#6
+     // panel#7
+     // panel#8
+     // panel#9
+     // panel#10
+     // panel#11
+        //*************** add jpanels to the container
+        lpane.add(panel1, new Integer(0), 0);
+        lpane.add(panel2, new Integer(1), 0);
+        lpane.add(panel3, new Integer(1), 0);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        new GUI();
+    }
+
+}
