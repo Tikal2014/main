@@ -38,6 +38,9 @@ public class GUI {			// I define everything here
      JLayeredPane lpane = new JLayeredPane();
      JPanel backPanel=new JPanel();
      JPanel panel2=new JPanel();
+     JPanel panel3=new JPanel();  // this JPanel will be the control pad place
+     JButton _exButt = new JButton("ADD EXPLORER");
+     JButton _endTurnButt = new JButton("END TURN");
      int _player=1; // set default turn is player #1
 
      ArrayList<ArrayList<JPanel>> jpButt=new ArrayList<ArrayList<JPanel>>();
@@ -54,17 +57,14 @@ public class GUI {			// I define everything here
 			jpTile.add(new ArrayList<JPanel>());
     		for(int j=0;j<6;j++){	
     			jpButt.get(i).add(new JPanel());
-    			jpTile.get(i).add(new JPanel()); 			
+    			jpTile.get(i).add(new JPanel()); 	
+    			jpButt.get(i).get(j).setLayout(new BorderLayout());
     		}
 
     	}
     	
     	JLabel aa = new JLabel();   
     	ImageIcon im = new ImageIcon("images/tikalmap1.jpg"); //background
-		
-//		ImageIcon tt2 = new ImageIcon("images/rect2.png");
-		
-		
 		
         frame.setPreferredSize(new Dimension(1280, 768)); // create frame size
         frame.setLayout(new BorderLayout());   // using borderlayout, basically I just want to put everyhing in the middle
@@ -75,20 +75,25 @@ public class GUI {			// I define everything here
         
         //***************iamgeIcons set Icon(image)
         aa.setIcon(im);
-        
 
         //*************** add imageIcons to Jpanels
-        
         backPanel.add(aa);
- 
         //*************** Jpenels' settings
         backPanel.setBounds(0, 0, 1024, 768);
         backPanel.setOpaque(true);
         		
+        //************** Contro pad Jpanel
+        panel3.setBounds(1000, 300, 300, 300);
+        panel3.setOpaque(true);
+        _exButt.addActionListener(new ButtonListener(this,1,1,_g)); //maybe need a separate listener
+        _endTurnButt.addActionListener(new ButtonListener(this,1,1,_g)); //maybe need a separate listener
+        panel3.add(_exButt);
+        panel3.add(_endTurnButt);
         //*************** add jpanels to the container
         tileRefresh();
         buttonRefresh();
-        lpane.add(backPanel, new Integer(0), 0);      
+        lpane.add(backPanel, new Integer(0), 0);    
+        lpane.add(panel3, new Integer(5), 0); 
         frame.pack();
         frame.setVisible(true);
     }
@@ -129,19 +134,18 @@ public class GUI {			// I define everything here
 			String temp="x:"+i+" y:"+j;
 			JButton b = new JButton(temp);
 			b.addActionListener(new ButtonListener(this,i,j,_g));
-		//	b.setLabel("toooooool");
-			jpButt.get(i).get(j).add(b);
+			jpButt.get(i).get(j).add(b, BorderLayout.CENTER);
 			lpane.add(jpButt.get(i).get(j), new Integer(2), 0);
 			jpButt.get(i).get(j).setBackground(new Color(0,0,0,0));
 			
 
 			//***************** set different positon for odd and even
 			if(i%2==0){//even
-			jpButt.get(i).get(j).setBounds(200+i*125,102+92*j, 160,40);
+			jpButt.get(i).get(j).setBounds(235+i*125,102+92*j, 80,40);
 			
 			}
 			else{
-			jpButt.get(i).get(j).setBounds(200+i*125,60+92*j, 160,40);
+			jpButt.get(i).get(j).setBounds(235+i*125,60+92*j, 80,40);
 			}
 			
 			//***************** odd&even end
@@ -152,13 +156,12 @@ public class GUI {			// I define everything here
 			jpButt.get(4).get(5).setVisible(false);
 		}
 		
-//		jpButt.get(0).get(0)
 	}
 
 	public void setButtonText(int i, int j, String arg0){   //reset the text in button
 		JButton b = new JButton(arg0);
 		jpButt.get(i).get(j).removeAll();
-		jpButt.get(i).get(j).add(b);
+		jpButt.get(i).get(j).add(b, BorderLayout.CENTER);
 	}
 	
 	public void addTile(int i,int j,int player){
@@ -170,7 +173,7 @@ public class GUI {			// I define everything here
 		
 		JLabel jlabel = new JLabel("Jerk#1");
 	    jlabel.setFont(new Font("Verdana",1,10));
-		jpButt.get(i).get(j).add(jlabel);
+		jpButt.get(i).get(j).add(jlabel, BorderLayout.NORTH);
 	}
     /**
      * @param args the command line arguments
