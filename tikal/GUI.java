@@ -46,12 +46,22 @@ public class GUI {			// I define everything here
     		// create the oject(a window popup) by running GUI. (It works through last method you see in this file)
     {
     	for(int i=0;i<6;i++){
+    		
     		jpButt.add(new ArrayList<JPanel>());
 			jpTile.add(new ArrayList<JPanel>());
-    		for(int j=0;j<6;j++){
+//			if(i%2==0){
+    		for(int j=0;j<6;j++){	
     			jpButt.get(i).add(new JPanel());
-    			jpTile.get(i).add(new JPanel());
+    			jpTile.get(i).add(new JPanel()); 			
     		}
+//			}
+//			else
+//			{
+//				for(int j=0;j<5;j++){	
+//	    			jpButt.get(i).add(new JPanel());
+//	    			jpTile.get(i).add(new JPanel()); 		
+//			}
+//			}
     	}
     	
     	JLabel aa = new JLabel();   
@@ -98,8 +108,17 @@ public class GUI {			// I define everything here
 			jpTile.get(i).get(j).add(tempLabel);
 			lpane.add(jpTile.get(i).get(j), new Integer(1), 0);
 			jpTile.get(i).get(j).setBackground(new Color(0,0,0,0));
+			//***************** set different positon for odd and even
+			if(i%2==0){
+			jpTile.get(i).get(j).setBounds(200+i*125,92+92*j, 160,160);
+			}
+			else{
 			jpTile.get(i).get(j).setBounds(200+i*125,50+92*j, 160,160);
-			jpTile.get(i).get(j).setVisible(true);
+			}
+			
+			//***************** odd&even end
+			
+			jpTile.get(i).get(j).setVisible(false);
 		}
 		}
 	}
@@ -113,17 +132,30 @@ public class GUI {			// I define everything here
 			jpButt.get(i).get(j).add(b);
 			lpane.add(jpButt.get(i).get(j), new Integer(2), 0);
 			jpButt.get(i).get(j).setBackground(new Color(0,0,0,0));
+			//***************** set different positon for odd and even
+			if(i%2==0){
+			jpButt.get(i).get(j).setBounds(200+i*125,102+92*j, 160,40);
+			}
+			else{
 			jpButt.get(i).get(j).setBounds(200+i*125,60+92*j, 160,40);
+			}
+			
+			//***************** odd&even end
+//			jpButt.get(i).get(j).setBounds(200+i*125,60+92*j, 160,40);
 			b.addActionListener(new ButtonListener(this,i,j,_g));
 			}
 		}
+		
+//		jpButt.get(0).get(0)
 	}
 
-	public void setButtonText(int i, int j, String arg0){ //reset the text in button
+	public void setButtonText(int i, int j, String arg0){   //reset the text in button
 		JButton b = new JButton(arg0);
 		jpButt.get(i).get(j).removeAll();
 		jpButt.get(i).get(j).add(b);
 	}
+	
+	
     /**
      * @param args the command line arguments
      */
