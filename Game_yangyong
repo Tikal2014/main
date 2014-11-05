@@ -1,0 +1,18 @@
+package tikal;
+
+public class Game {
+	tikal.GUI _gui=new tikal.GUI();
+	int _x,_y,_count;
+	public Game(){
+		
+	}
+	
+	public void acquirePosition(int i, int j, int count){ // get the position information and then call the gui's reset text method
+		_x=i;
+		_y=j;
+		_count=count;
+		String temp=""+(count-1);
+		if(count==1){_gui.setButtonText(i, j, "add Pyramid");}
+		else{_gui.setButtonText(i, j, temp);}
+	}
+}
