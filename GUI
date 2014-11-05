@@ -99,6 +99,7 @@ public class GUI {			// I define everything here
 			lpane.add(jpTile.get(i).get(j), new Integer(1), 0);
 			jpTile.get(i).get(j).setBackground(new Color(0,0,0,0));
 			jpTile.get(i).get(j).setBounds(200+i*125,50+92*j, 160,160);
+			jpTile.get(i).get(j).setVisible(true);
 		}
 		}
 	}
@@ -107,7 +108,8 @@ public class GUI {			// I define everything here
     	
 		for (int i = 0; i < 6; i++) { // add button
 			for (int j = 0; j < 6; j++){
-			JButton b = new JButton("button");
+			String temp="x:"+i+" y:"+j;
+			JButton b = new JButton(temp);
 			jpButt.get(i).get(j).add(b);
 			lpane.add(jpButt.get(i).get(j), new Integer(2), 0);
 			jpButt.get(i).get(j).setBackground(new Color(0,0,0,0));
