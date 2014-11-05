@@ -3,8 +3,13 @@ package tikal;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.util.ArrayList;
 
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -17,27 +22,42 @@ import javax.swing.JPanel;
 //***************************************************
 
 
+
+
+
+
+import tikal.ButtonListener;
+
+
 public class GUI {			// I define everything here
-    private JFrame frame = new JFrame();
-    private JLayeredPane lpane = new JLayeredPane();
-    private JPanel panel1 = new JPanel();
-    private JPanel panel2 = new JPanel();
-    private JPanel panel3 = new JPanel();
-    private JPanel panel4 = new JPanel();
-    private JPanel panel5 = new JPanel();
-    private JPanel panel6 = new JPanel();
-    private JPanel panel7 = new JPanel();
-    private JPanel panel8 = new JPanel();
-    private JPanel panel9 = new JPanel();
-    
+	
+	 tikal.Game _g;
+     JFrame frame = new JFrame();
+     JLayeredPane lpane = new JLayeredPane();
+     JPanel backPanel=new JPanel();
+     JPanel panel2=new JPanel();
+
+     ArrayList<ArrayList<JPanel>> jpButt=new ArrayList<ArrayList<JPanel>>();
+     ArrayList<ArrayList<JPanel>> jpTile=new ArrayList<ArrayList<JPanel>>();
+     
+     
     public GUI() //this is the constructor
     		//I define GUI in a simplier way compare to our previous work, there is no run() and we can directly 
     		// create the oject(a window popup) by running GUI. (It works through last method you see in this file)
     {
+    	for(int i=0;i<6;i++){
+    		jpButt.add(new ArrayList<JPanel>());
+			jpTile.add(new ArrayList<JPanel>());
+    		for(int j=0;j<6;j++){
+    			jpButt.get(i).add(new JPanel());
+    			jpTile.get(i).add(new JPanel());
+    		}
+    	}
+    	
     	JLabel aa = new JLabel();   
-    	JLabel bb = new JLabel();
-    	ImageIcon im = new ImageIcon("images/background_L.jpg");
-		ImageIcon tt = new ImageIcon("images/tile4.png");
+    	ImageIcon im = new ImageIcon("images/tikalmap1.jpg"); //background
+		
+//		ImageIcon tt2 = new ImageIcon("images/rect2.png");
 		
 		
 		
@@ -50,43 +70,58 @@ public class GUI {			// I define everything here
         
         //***************iamgeIcons set Icon(image)
         aa.setIcon(im);
-        bb.setIcon(tt);
-//        bb.setBounds(50, 50, 30, 30);
         
+
         //*************** add imageIcons to Jpanels
-        panel1.add(aa);
-        panel2.add(bb);
-//        panel3.add(bb);
         
+        backPanel.add(aa);
+ 
         //*************** Jpenels' settings
-                // panel#1
-        panel1.setBounds(0, 0, 1024, 768);
-        panel1.setOpaque(true);
-        		// panel#2
-        panel2.setBackground(new Color(0,0,0,0));
-        panel2.setBounds(170, 340, 160, 160);
-        panel2.setOpaque(true);
-     // panel#3
-//        panel3.setBackground(new Color(0,0,0,0));
-//        panel3.setBounds(550, 100, 100, 100);
-//        panel3.setOpaque(true);
-     // panel#4
-     // panel#5
-     // panel#6
-     // panel#7
-     // panel#8
-     // panel#9
-     // panel#10
-     // panel#11
+        backPanel.setBounds(0, 0, 1024, 768);
+        backPanel.setOpaque(true);
+        		
         //*************** add jpanels to the container
-        lpane.add(panel1, new Integer(0), 0);
-        lpane.add(panel2, new Integer(1), 0);
-        lpane.add(panel3, new Integer(1), 0);
+        tileRefresh();
+        buttonRefresh();
+        lpane.add(backPanel, new Integer(0), 0);      
         frame.pack();
         frame.setVisible(true);
     }
+    public void tileRefresh() { 
+    	
+       
+		for (int i = 0; i < 6; i++) { // add tile
+			for (int j = 0; j < 6; j++){
+			ImageIcon tt = new ImageIcon("images/rect2.png");
+			JLabel tempLabel = new JLabel();
+			tempLabel.setIcon(tt);
+			jpTile.get(i).get(j).add(tempLabel);
+			lpane.add(jpTile.get(i).get(j), new Integer(1), 0);
+			jpTile.get(i).get(j).setBackground(new Color(0,0,0,0));
+			jpTile.get(i).get(j).setBounds(200+i*125,50+92*j, 160,160);
+		}
+		}
+	}
+    
+	public void buttonRefresh() {
+    	
+		for (int i = 0; i < 6; i++) { // add button
+			for (int j = 0; j < 6; j++){
+			JButton b = new JButton("button");
+			jpButt.get(i).get(j).add(b);
+			lpane.add(jpButt.get(i).get(j), new Integer(2), 0);
+			jpButt.get(i).get(j).setBackground(new Color(0,0,0,0));
+			jpButt.get(i).get(j).setBounds(200+i*125,60+92*j, 160,40);
+			b.addActionListener(new ButtonListener(this,i,j,_g));
+			}
+		}
+	}
 
-
+	public void setButtonText(int i, int j, String arg0){ //reset the text in button
+		JButton b = new JButton(arg0);
+		jpButt.get(i).get(j).removeAll();
+		jpButt.get(i).get(j).add(b);
+	}
     /**
      * @param args the command line arguments
      */
