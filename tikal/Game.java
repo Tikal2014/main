@@ -2,12 +2,15 @@ package tikal;
 
 public class Game {
 
-	private int _tileCount = 0;
+	/*
+	 * Tile and Board classes handle these
+	 */
+/*	private int _tileCount = 0;
 	Tile[] tilePositions = new Tile[33]; //array of tiles, with indices as positions
 	Integer[] p1ExplorerPositions = new Integer[33]; //array of player 1 explorer counts and positions
 	Integer[] p2ExplorerPositions = new Integer[33]; //same for p2
 	Integer[] pyramidPositions = new Integer[33]; //array of pyramid positions and values
-
+*/
 	public void placeExplorer(int tile) { //placing an explorer, at the tile position used as a parameter
 		if (Player.enoughAP()) {//checks for enough AP
 			if (Player.getPlayer() == "Player1") {
@@ -49,15 +52,17 @@ public class Game {
 		Player.resetAP();
 	}
 
-	public void addTile() {
+	/*
+	 * addTile method moved to Board class
+	 */
+/*	public void addTile() {
 		_tileCount++;
 		if (_tileCount == 33) { //board is full
 			scoreP1(p1ExplorerPositions, p2ExplorerPositions, pyramidPositions);
 			scoreP2(p1ExplorerPositions, p2ExplorerPositions, pyramidPositions);
 			endGame();
 		}
-
-	}
+	} */
 
 	private void endGame() {
 		//prevnts more moves from ebing made, displays message
