@@ -1,0 +1,22 @@
+public class Tile {
+  
+  private int total = 33;
+  
+	public static boolean hasPyramid(int tile) {
+		// Need to check whetehr tiles has at least a base pyramid
+		return false;
+	}
+	
+	public static void remove(){
+	  total = total - 1;
+	}
+	
+	public static boolean isEmpty(){  // if the tile is empty, it means the game ends
+	  if(total == 0){
+	    return true;
+	  }else{
+	    return false;
+	  }
+	}
+
+}
