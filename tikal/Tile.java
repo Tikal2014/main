@@ -12,6 +12,7 @@ public class Tile {
 	private int exp_p2;
 	private Player p1;
 	private player p2;
+	private boolean connect[6];
 	
 	public Tile(Player one, Player two) {
 		p1 = one;
@@ -19,6 +20,8 @@ public class Tile {
 		pyramid = 0;
 		exp_p1 = 0;
 		exp_p2 = 0;
+		for (int i = 0; i < 6; i++)
+			connect[i] = true;
 	}
 	
 	public Tile(Player one, Player two, int init_pyramid) {

@@ -11,6 +11,12 @@ public class Game {
 	Integer[] p2ExplorerPositions = new Integer[33]; //same for p2
 	Integer[] pyramidPositions = new Integer[33]; //array of pyramid positions and values
 */
+	private board;
+	
+	public Game() {
+		board = new Board;
+	}
+	
 	public void placeExplorer(int tile) { //placing an explorer, at the tile position used as a parameter
 		if (Player.enoughAP()) {//checks for enough AP
 			if (Player.getPlayer() == "Player1") {
