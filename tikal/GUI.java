@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ import javax.swing.JPanel;
 
 
 
+
 import tikal.ButtonListener;
 
 
@@ -36,6 +38,7 @@ public class GUI {			// I define everything here
      JLayeredPane lpane = new JLayeredPane();
      JPanel backPanel=new JPanel();
      JPanel panel2=new JPanel();
+     int _player=1; // set default turn is player #1
 
      ArrayList<ArrayList<JPanel>> jpButt=new ArrayList<ArrayList<JPanel>>();
      ArrayList<ArrayList<JPanel>> jpTile=new ArrayList<ArrayList<JPanel>>();
@@ -49,19 +52,11 @@ public class GUI {			// I define everything here
     		
     		jpButt.add(new ArrayList<JPanel>());
 			jpTile.add(new ArrayList<JPanel>());
-//			if(i%2==0){
     		for(int j=0;j<6;j++){	
     			jpButt.get(i).add(new JPanel());
     			jpTile.get(i).add(new JPanel()); 			
     		}
-//			}
-//			else
-//			{
-//				for(int j=0;j<5;j++){	
-//	    			jpButt.get(i).add(new JPanel());
-//	    			jpTile.get(i).add(new JPanel()); 		
-//			}
-//			}
+
     	}
     	
     	JLabel aa = new JLabel();   
@@ -109,7 +104,7 @@ public class GUI {			// I define everything here
 			lpane.add(jpTile.get(i).get(j), new Integer(1), 0);
 			jpTile.get(i).get(j).setBackground(new Color(0,0,0,0));
 			//***************** set different positon for odd and even
-			if(i%2==0){
+			if(i%2==0){ //even
 			jpTile.get(i).get(j).setBounds(200+i*125,92+92*j, 160,160);
 			}
 			else{
@@ -118,7 +113,11 @@ public class GUI {			// I define everything here
 			
 			//***************** odd&even end
 			
-			jpTile.get(i).get(j).setVisible(false);
+			jpTile.get(i).get(j).setVisible(true);
+			explorerAdd(i,j,1);
+			jpTile.get(0).get(5).setVisible(false);// to make 5,6,5,6,5,6 game board
+			jpTile.get(2).get(5).setVisible(false);
+			jpTile.get(4).get(5).setVisible(false);
 		}
 		}
 	}
@@ -129,12 +128,17 @@ public class GUI {			// I define everything here
 			for (int j = 0; j < 6; j++){
 			String temp="x:"+i+" y:"+j;
 			JButton b = new JButton(temp);
+			b.addActionListener(new ButtonListener(this,i,j,_g));
+		//	b.setLabel("toooooool");
 			jpButt.get(i).get(j).add(b);
 			lpane.add(jpButt.get(i).get(j), new Integer(2), 0);
 			jpButt.get(i).get(j).setBackground(new Color(0,0,0,0));
+			
+
 			//***************** set different positon for odd and even
-			if(i%2==0){
+			if(i%2==0){//even
 			jpButt.get(i).get(j).setBounds(200+i*125,102+92*j, 160,40);
+			
 			}
 			else{
 			jpButt.get(i).get(j).setBounds(200+i*125,60+92*j, 160,40);
@@ -142,8 +146,10 @@ public class GUI {			// I define everything here
 			
 			//***************** odd&even end
 //			jpButt.get(i).get(j).setBounds(200+i*125,60+92*j, 160,40);
-			b.addActionListener(new ButtonListener(this,i,j,_g));
 			}
+			jpButt.get(0).get(5).setVisible(false);// to make 5,6,5,6,5,6 game board
+			jpButt.get(2).get(5).setVisible(false);
+			jpButt.get(4).get(5).setVisible(false);
 		}
 		
 //		jpButt.get(0).get(0)
@@ -155,7 +161,17 @@ public class GUI {			// I define everything here
 		jpButt.get(i).get(j).add(b);
 	}
 	
-	
+	public void addTile(int i,int j,int player){
+		_player=player;  //*** for later use
+		jpTile.get(i).get(j).setVisible(true);
+		
+	}
+	public void explorerAdd(int i, int j, int player){
+		
+		JLabel jlabel = new JLabel("Jerk#1");
+	    jlabel.setFont(new Font("Verdana",1,10));
+		jpButt.get(i).get(j).add(jlabel);
+	}
     /**
      * @param args the command line arguments
      */
