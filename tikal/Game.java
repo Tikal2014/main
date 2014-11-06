@@ -11,7 +11,7 @@ public class Game {
 	int[] p2ExplorerPositions = new int[33]; //same for p2
 	int[] pyramidPositions = new int[33]; //array of pyramid positions and values
 */
-	private board;
+	private Board board;
 	
 	public Game() {
 		board = new Board;

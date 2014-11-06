@@ -66,6 +66,9 @@ public class Tile {
 		return pyramid == 1;
 	}
 	
+
+    /* Currently, we assume that all tile boundaries are crossable in both directions.
+        Path limitation will be implemented in the next release. */
 	public boolean connectsTo(int xpos, int ypos) {
 		/**If the tile at xpos, ypos can be reached from this tile, returns true.
 		 * Otherwise returns false.
@@ -85,7 +88,7 @@ public class Tile {
 /*****************************************************************************
 				Getters
 *****************************/
-	public Player winningPlayer() {
+	public Player getWinningPlayer() {
 		/**This method returns whichever player has a greater number of explorers on
 		 * the tile, or Null if there is a tie.
 		 */
@@ -102,4 +105,11 @@ public class Tile {
 		 */
 		return connect;
 	}
+
+/*****************************************************************************
+				Setters
+*****************************/
+    public 
+
+
 }
