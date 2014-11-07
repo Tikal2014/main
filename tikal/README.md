@@ -11,17 +11,17 @@ Yuchuan Cheng (yuchuanc@buffalo.edu)
 Kevin Duggan (kevindug@buffalo.edu)
 
 Phase 1 Tikal Functionality:
--Data structures which keep track of tile positions, explorer positions, and pyramid positions, in addition to explorer quantities and pyramid levels
+- Data structures which keep track of tile positions, explorer positions, and pyramid positions, in addition to explorer quantities and pyramid levels
 
--GUI with ability to display individual tiles, buttons to place tiles in board positions
+- GUI with ability to display individual tiles, buttons to place tiles in board positions
 
--Defined methods for player actions: place explorer, place pyramid, move explorer, and end turn
+- Defined methods for player actions: place explorer, place pyramid, move explorer, and end turn
 
--Player class which tracks remaining AP and current player
+- Player class which tracks remaining AP and current player
 
--Player class has methods which check if AP>0, reduce AP, reset AP, and switch current player
+- Player class has methods which check if AP>0, reduce AP, reset AP, and switch current player
 
--Scoring methods which, when the game ends (the last tile is placed) calculate and return the score of each player
+- Scoring methods which, when the game ends (the last tile is placed) calculate and return the score of each player
 
 Planned Phase 2 Functionality:
 
