@@ -13,21 +13,19 @@ public class Tile {
 	private int pyramid;        /* Pyramid level. 0 = no base, 1 = base, >1 = levels */
 	private int exp_p1;         /* Player 1 explorers */
 	private int exp_p2;
-	private Player p1;          /* Reference to player one Player object */
-	private Player p2;
+//	private Player player;      /* Reference to player one Player object */
 	private boolean[] connect;  /* Array of path markers */
 	
 	
 /*****************************************************************************
 				Constructors
 *****************************/
-	public Tile(int xpos, int ypos, Player one, Player two) {
+	public Tile(int xpos, int ypos, Player ply) {
         /** This option: Pass the tile its x and y positions, and references to each player.
             Explorers and pyramid levels are initialized at zero. */
 		x = xpos;
 		y = ypos;
-		p1 = one;
-		p2 = two;
+        player = ply;
 		pyramid = 1;    /* Default is for tile to have a pyramid base. */
 		exp_p1 = 0;
 		exp_p2 = 0;
@@ -37,12 +35,11 @@ public class Tile {
 			connect[i] = true;
 	}
 	
-	public Tile(int xpos, int ypos, Player one, Player two, int init_pyramid) {
+	public Tile(int xpos, int ypos, Player ply, int init_pyramid) {
         /** This option: same as above, plus set pyramid number on instantiation. */
 		x = xpos;
 		y = ypos;
-		p1 = one;
-		p2 = two;
+		player = ply;
 		pyramid = init_pyramid;
 		exp_p1 = 0;
 		exp_p2 = 0;
@@ -52,12 +49,11 @@ public class Tile {
 			connect[i] = true;
 	}
 	
-	public Tile(int xpos, int ypos, Player one, Player two, int init_pyramid, int p1exp, int p2exp) {
+	public Tile(int xpos, int ypos, Player ply, int init_pyramid, int p1exp, int p2exp) {
         /** This option: same as above, but also set explorers for each player. */
 		x = xpos;
 		y = ypos;
-		p1 = one;
-		p2 = two;
+		player = ply;
 		pyramid = init_pyramid;
 		exp_p1 = p1exp;
 		exp_p2 = p2exp;
@@ -131,21 +127,21 @@ public class Tile {
         return pyramid - 1;
     }
 
-    public int getExplorers(Player p) {
+    public int getExplorers(String p) {
     /**This method returns the number of explorers for the specified player.*/
-        if (p == p1)
+        if (p.equals("Player1")
                 return p1_exp;
         return p2_exp;
     }
 	
-    public Player getPlayerWithMostExplorers() {
+    public String getPlayerWithMostExplorers() {
 		/**This method returns whichever player has a greater number of explorers on
 		 * the tile, or Null if there is a tie.
 		 */
 		if (exp_p1 > exp_p2)
-			return p1;
+			return "Player1";
 		if (exp_p1 < exp_p2)
-			return p2;
+			return "Player2";
 		return null;
 	}
 
@@ -181,19 +177,19 @@ public class Tile {
         return false;
     }
     
-    public void addExplorer(Player p) {
+    public void addExplorer(String p) {
         /**This method adds an explorer for the player specified.*/
-        if (p == p1) {
+        if (p.getPlayer().equals("Player1") {
                 ++p1_exp;
                 return null;
         }
         ++p2_exp;
     }
 
-    public boolean removeExplorer(Player p) {
+    public boolean removeExplorer(String p) {
         /**As long as player "p" has at least 1 explorer on the tile, this method removes 1 exp.
         and returns true. Otherwise it removes nothing and returns false.*/
-        if (p == p1)
+        if (p.equals("Player1")
                 if (p1_exp > 0) {
                         --p1_exp;
                         return true;
