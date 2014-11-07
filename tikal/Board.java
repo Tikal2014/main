@@ -5,15 +5,15 @@
  */
 
 package tikal;
-
 import java.util.*;
 
 public class Board {
 		ArrayList<ArrayList<Tile>> grid;
-		int tilecount;	/* Keeps track of number of tiles on board */
+		int tilecount;
 		Player p1, p2;
 		
 		public Board(Player one, Player two) {
+            /**This class needs references to each Player object when it is instantiated.*/
 			p1 = one;
 			p2 = two;
 			grid = new ArrayList<ArrayList<Tile>>();
