@@ -7,6 +7,8 @@ package tikal;
 
 public class Tile {
 	
+    static int PYRAMIDMAX;      /* Magic number: max height of pyramid */
+
 	private int x, y;           /* X-Y Coords of this tile*/
 	private int pyramid;        /* Pyramid level. 0 = no base, 1 = base, >1 = levels */
 	private int exp_p1;         /* Player 1 explorers */
@@ -26,10 +28,10 @@ public class Tile {
 		y = ypos;
 		p1 = one;
 		p2 = two;
-		pyramid = 1;
+		pyramid = 1;    /* Default is for tile to have a pyramid base. */
 		exp_p1 = 0;
 		exp_p2 = 0;
-		
+		PYRAMIDMAX = 4;
 		connect = new boolean[6];
 		for (int i = 0; i < 6; i++)
 			connect[i] = true;
@@ -44,6 +46,10 @@ public class Tile {
 		pyramid = init_pyramid;
 		exp_p1 = 0;
 		exp_p2 = 0;
+		PYRAMIDMAX = 4;
+		connect = new boolean[6];
+		for (int i = 0; i < 6; i++)
+			connect[i] = true;
 	}
 	
 	public Tile(int xpos, int ypos, Player one, Player two, int init_pyramid, int p1exp, int p2exp) {
@@ -55,16 +61,15 @@ public class Tile {
 		pyramid = init_pyramid;
 		exp_p1 = p1exp;
 		exp_p2 = p2exp;
+		PYRAMIDMAX = 4;
+		connect = new boolean[6];
+		for (int i = 0; i < 6; i++)
+			connect[i] = true;
 	}
 	
 /*****************************************************************************
 				Status Queries
 *****************************/
-	public boolean hasPyramid() {
-		/**This method returns true if there is a pyramid, and false if there is none. */
-		return pyramid > 2; /* A pyramid level of 2 represents a pyr base, + 1 level. */
-	}
-
 	public boolean hasPyramidBase() {
 		/**This method returns true if there is a pyramid base present, false otherwise. */
 		return pyramid > 1;
@@ -75,6 +80,10 @@ public class Tile {
         return pyramid == 1;
     }
 	
+	public boolean hasPyramid() {
+		/**This method returns true if there is a pyramid, and false if there is none. */
+		return pyramid > 2; /* A pyramid level of 2 represents a pyr base, + 1 level. */
+	}
 
     /* Currently, we assume that all tile boundaries are crossable in both directions.
         Path limitation will be implemented in the next release. */
@@ -92,8 +101,8 @@ public class Tile {
 		}
 		
 		return false;
-			
 	}
+
 /*****************************************************************************
 				Getters
 *****************************/
@@ -123,6 +132,8 @@ public class Tile {
 
     public int getPyramidLevels() {
         /**This method returns the height of the pyramid, not counting the base.*/
+        if (pyramid = 0) // No base means no levels
+                return 0;
         return pyramid - 1;
     }
 
@@ -140,7 +151,8 @@ public class Tile {
     }
     
     public boolean addPyramidLevel() {
-        /**If the pyramid level is not at the maximum, it 
+        /**If the pyramid level is not at the maximum, add a level and return true.
+            If the pyramid level is maxed out, add nothing, return false. */
 
 
 }
