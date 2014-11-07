@@ -2,15 +2,6 @@ package tikal;
 
 public class Game {
 
-	/*
-	 * Tile and Board classes handle these
-	 */
-/*	private int _tileCount = 0;
-	Tile[] tilePositions = new Tile[33]; //array of tiles, with indices as positions
-	int[] p1ExplorerPositions = new int[33]; //array of player 1 explorer counts and positions
-	int[] p2ExplorerPositions = new int[33]; //same for p2
-	int[] pyramidPositions = new int[33]; //array of pyramid positions and values
-*/
 	private Board board;
 	
 	public Game() {
