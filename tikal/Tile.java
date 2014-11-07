@@ -85,6 +85,11 @@ public class Tile {
 		return pyramid > 2; /* A pyramid level of 2 represents a pyr base, + 1 level. */
 	}
 
+    public boolean canAddPyramidLevel() {
+        /**This method returns true if there is room for another pyramid level, false otherwise*/
+        return (pyramid < PYRAMIDMAX);
+    }
+
     /* Currently, we assume that all tile boundaries are crossable in both directions.
         Path limitation will be implemented in the next release. */
 	public boolean connectsTo(int xpos, int ypos) {
@@ -106,17 +111,6 @@ public class Tile {
 /*****************************************************************************
 				Getters
 *****************************/
-	public Player getPlayerWithMostExplorers() {
-		/**This method returns whichever player has a greater number of explorers on
-		 * the tile, or Null if there is a tie.
-		 */
-		if (exp_p1 > exp_p2)
-			return p1;
-		if (exp_p1 < exp_p2)
-			return p2;
-		return null;
-	}
-
 	public boolean[] getConnectionArray() {
 		/**This method returns an array of boolean values, representing which directions
 		 * the tile connects to. Position 0 is the top; numbering proceeds clockwise
@@ -137,6 +131,24 @@ public class Tile {
         return pyramid - 1;
     }
 
+    public int getExplorers(Player p) {
+    /**This method returns the number of explorers for the specified player.*/
+        if (p == p1)
+                return p1_exp;
+        return p2_exp;
+    }
+	
+    public Player getPlayerWithMostExplorers() {
+		/**This method returns whichever player has a greater number of explorers on
+		 * the tile, or Null if there is a tie.
+		 */
+		if (exp_p1 > exp_p2)
+			return p1;
+		if (exp_p1 < exp_p2)
+			return p2;
+		return null;
+	}
+
 /*****************************************************************************
 				Setters
 *****************************/
@@ -153,6 +165,46 @@ public class Tile {
     public boolean addPyramidLevel() {
         /**If the pyramid level is not at the maximum, add a level and return true.
             If the pyramid level is maxed out, add nothing, return false. */
+        if (pyramid == PYRAMIDMAX)
+                return false;
+        ++pyramid;
+        return true;
+    }
+
+    public boolean removePyramidLevel() {
+        /**This method removes 1 level and returns true if there is at least 1 level on top of
+        the base. It changes nothing and returns false otherwise.*/
+        if (pyramid > 1) {
+                --pyramid;
+                return true;
+        }
+        return false;
+    }
+    
+    public void addExplorer(Player p) {
+        /**This method adds an explorer for the player specified.*/
+        if (p == p1) {
+                ++p1_exp;
+                return null;
+        }
+        ++p2_exp;
+    }
+
+    public boolean removeExplorer(Player p) {
+        /**As long as player "p" has at least 1 explorer on the tile, this method removes 1 exp.
+        and returns true. Otherwise it removes nothing and returns false.*/
+        if (p == p1)
+                if (p1_exp > 0) {
+                        --p1_exp;
+                        return true;
+                }
+        if (p2_exp > 0) {
+                --p2_exp;
+                return true;
+        }
+        return false;
+    }
 
 
+    
 }
