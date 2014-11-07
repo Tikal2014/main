@@ -13,9 +13,7 @@ Kevin Duggan (kevindug@buffalo.edu)
 Phase 1 Tikal Functionality:
 -Data structures which keep track of tile positions, explorer positions, and pyramid positions, in addition to explorer quantities and pyramid levels
 
--GUI with ability to display individual tiles
-
--Tiles which present the number of explorers for each player and pyramid level they contain
+-GUI with ability to display individual tiles, buttons to place tiles in board positions
 
 -Defined methods for player actions: place explorer, place pyramid, move explorer, and end turn
 
@@ -26,6 +24,13 @@ Phase 1 Tikal Functionality:
 -Scoring methods which, when the game ends (the last tile is placed) calculate and return the score of each player
 
 Planned Phase 2 Functionality:
--Player interface that allows players to perform actions and present them with game information
 
--Ability to determine tile placement legality based on edge paths
+- Complete GUI with ability to add pyramid levels and explorers, move explorers; rule-limited tile placement; valid explorer movement path checking
+
+- Complete GUI display, displaying information about explorers, pyramids, and valid paths on each tile
+
+- Random tile generation
+
+- Complete endgame method that handles end of play
+
+- Link GUI with underlying data structures through provided methods
