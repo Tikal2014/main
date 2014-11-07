@@ -7,7 +7,10 @@ public class Game {
 	public Game() {
 		board = new Board;
 	}
-	
+
+/*The functionality in these methods has been moved to the Tile class, which provides methods for these
+operations. */
+/************************************************************************************************
 	public int[] placeExplorer(int tile) { //placing an explorer, at the tile position used as a parameter
 		if (Player.enoughAP()) {//checks for enough AP
 			if (Player.getPlayer() == "Player1") {
@@ -35,7 +38,7 @@ public class Game {
 		}
 		return pyramidPositions;
 	}
-
+******************************************************/
 	public void moveExplorer(int startTile, int endTile) { //moving from start tile (current) to end tile
 		// check if move is legal
 		if (Player.enoughAP()) {
